@@ -1,5 +1,7 @@
 import os
 from datetime import datetime, timedelta
+from pathlib import Path
+
 import pandas as pd
 
 from feast import FeatureStore
@@ -17,7 +19,10 @@ entity_df = pd.DataFrame.from_dict(
     }
 )
 
-store = FeatureStore(repo_path="")
+cur_dir = Path(__file__).parent
+feature_repo_name = "feature_repo"
+feature_repo_path = str(Path(cur_dir, feature_repo_name))
+store = FeatureStore(repo_path=feature_repo_path)
 
 training_df = store.get_historical_features(
     entity_df=entity_df,

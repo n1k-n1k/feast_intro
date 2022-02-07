@@ -2,13 +2,18 @@
 
 from google.protobuf.duration_pb2 import Duration
 
+from pathlib import Path
+
 from feast import Entity, Feature, FeatureView, FileSource, ValueType
 
 # Read data from parquet files. Parquet is convenient for local development mode. For
 # production, you can use your favorite DWH, such as BigQuery. See Feast documentation
 # for more info.
+cur_dir = Path(__file__).parent
+parquet_name = "data/driver_stats.parquet"
+parquet_path = str(Path(cur_dir, parquet_name))
 driver_hourly_stats = FileSource(
-    path="data\\driver_stats.parquet",
+    path=parquet_path,
     event_timestamp_column="event_timestamp",
     created_timestamp_column="created",
 )

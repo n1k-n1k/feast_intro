@@ -1,7 +1,11 @@
+from pathlib import Path
 from pprint import pprint
 from feast import FeatureStore
 
-store = FeatureStore(repo_path="")
+cur_dir = Path(__file__).parent
+feature_repo_name = "feature_repo"
+feature_repo_path = str(Path(cur_dir, feature_repo_name))
+store = FeatureStore(repo_path=feature_repo_path)
 
 feature_vector = store.get_online_features(
     features=[
